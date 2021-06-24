@@ -29,7 +29,7 @@ def link(name):
     return (link)
    except Exception as e:
      print("Error"+str(e))
-     return render_template("index.html" , error="Enter the name properly")
+     return josnify(error="Enter the name properly")
 
 
 @app.route('/update', methods=["POST", "GET"])
@@ -58,8 +58,6 @@ def video_link():
      except Exception as e:
         print("ERROR==>"+str(e))
         return jsonify(error="Enter the name properly")
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
