@@ -3,7 +3,6 @@ from youtubesearchpython import Search
 import requests
 import youtube_dl
 from datetime import datetime
-import urllib.request
 import os
 download_link = ""
 title = ""
@@ -15,7 +14,7 @@ i = 0
 def link(name):
    try:
     global i
-    print(i)
+    i = 1
     download_link = ""
     url_data = ""
     allSearch = Search(str(name), limit = 2)
@@ -57,13 +56,13 @@ def video_link():
         download_link = url_data["formats"][0]["url"]
         hd_link = url_data["formats"][3]["url"]
         title = url_data["title"]
-        responce = requests.get(download_link)
-        if not responce and i<=2:
-            video_link()
-            i += 1
-        else:
-            pass
-        i = 0  
+        # responce = requests.get(download_link)
+        # if not responce and i<2:
+        #     video_link()
+        #     i += 1
+        # else:
+        #     pass
+        # i = 0  
         return jsonify(thumbnail=thumbnail , audio=(str(download_link)),hd_audio=str(hd_link))
      except Exception as e:
         print("ERROR==>"+str(e))
