@@ -10,23 +10,22 @@ app = Flask(__name__)
  
 
 
-
 def link(name):
    try:
+    i = 1
     download_link = ""
     url_data = ""
-    allSearch = Search(str(name), limit = 3)
+    allSearch = Search(str(name), limit = 2)
     data = allSearch.result()
     link = data["result"][0]["link"]
     while True:
         if "https://www.youtube.com/channel/" in link:
-            link =  data["result"][1]["link"]
-            alt_link = data["result"][2]["link"]
+            link =  data["result"][i]["link"]
         else:
-            link =  data["result"][1]["link"]
-            alt_link = data["result"][2]["link"]
+            link =  data["result"][i]["link"]
             break
-    return (link , alt_link)
+        i += 1
+    return (link)
    except Exception as e:
      print("Error"+str(e))
      return josnify(error="Enter the name properly")
@@ -48,24 +47,20 @@ def video_link():
         if "https://youtu." in name:
             url = name
         else:
-            url , alt_url = link(str(name+"song"))
+            url = link(str(name+"song"))
         with youtube_dl.YoutubeDL() as ydl:
             url_data = ydl.extract_info(url, download=False)
         thumbnail = url_data["thumbnails"][0]["url"]
         download_link = url_data["formats"][0]["url"]
         hd_link = url_data["formats"][3]["url"]
         title = url_data["title"]
-        responce = requests.get(download_link)
-        if not responce:
-            with youtube_dl.YoutubeDL() as ydl:
-                url_data = ydl.extract_info(alt_url, download=False)
-                thumbnail = url_data["thumbnails"][0]["url"]
-                download_link = url_data["formats"][0]["url"]
-                hd_link = url_data["formats"][3]["url"]
-                title = url_data["title"]
-        else:
-            pass
-    
+        # responce = requests.get(download_link)
+        # if not responce and i<2:
+        #     video_link()
+        #     i += 1
+        # else:
+        #     pass
+        # i = 0  
         return jsonify(thumbnail=thumbnail , audio=(str(download_link)),hd_audio=str(hd_link))
      except Exception as e:
         print("ERROR==>"+str(e))
