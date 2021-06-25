@@ -58,7 +58,7 @@ def video_link():
         hd_link = url_data["formats"][3]["url"]
         title = url_data["title"]
         responce = requests.get(download_link)
-        if not responce:
+        if not responce and i<=2:
             video_link()
             i += 1
         else:
