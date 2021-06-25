@@ -55,7 +55,7 @@ def video_link():
         hd_link = url_data["formats"][3]["url"]
         title = url_data["title"]
         responce = requests.get(download_link)
-        if not responce:
+        if  responce.status_code != "200":
             return jsonify(error="This Song Is Not Downloadable.Please Try TO Search This Song With Another Name :(")
         else:
             return jsonify(thumbnail=thumbnail , audio=(str(download_link)),hd_audio=str(hd_link))
