@@ -54,14 +54,11 @@ def video_link():
         download_link = url_data["formats"][0]["url"]
         hd_link = url_data["formats"][3]["url"]
         title = url_data["title"]
-        # responce = requests.get(download_link)
-        # if not responce and i<2:
-        #     video_link()
-        #     i += 1
-        # else:
-        #     pass
-        # i = 0  
-        return jsonify(thumbnail=thumbnail , audio=(str(download_link)),hd_audio=str(hd_link))
+        responce = requests.get(download_link)
+        if not responce:
+            return jsonify(error="This Song Is Not Downloadable.Please Try TO Search This Song With Another Name :(")
+        else:
+            return jsonify(thumbnail=thumbnail , audio=(str(download_link)),hd_audio=str(hd_link))
      except Exception as e:
         print("ERROR==>"+str(e))
         return jsonify(error="Enter the name properly")
