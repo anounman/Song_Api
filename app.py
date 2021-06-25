@@ -56,13 +56,13 @@ def video_link():
         download_link = url_data["formats"][0]["url"]
         hd_link = url_data["formats"][3]["url"]
         title = url_data["title"]
-        # responce = requests.get(download_link)
-        # if not responce and i<2:
-        #     video_link()
-        #     i += 1
-        # else:
-        #     pass
-        # i = 0  
+        responce = requests.get(download_link)
+        if not responce and i<=2:
+            i += 1
+            video_link()
+        else:
+            pass
+        i = 1  
         return jsonify(thumbnail=thumbnail , audio=(str(download_link)),hd_audio=str(hd_link))
      except Exception as e:
         print("ERROR==>"+str(e))
