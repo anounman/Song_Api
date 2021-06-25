@@ -14,7 +14,6 @@ i = 0
 def link(name):
    try:
     global i
-    i = 1
     download_link = ""
     url_data = ""
     allSearch = Search(str(name), limit = 2)
