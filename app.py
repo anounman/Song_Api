@@ -14,9 +14,10 @@ i = 0
 def link(name):
    try:
     global i
+    print(i)
     download_link = ""
     url_data = ""
-    allSearch = Search(str(name), limit = 2)
+    allSearch = Search(str(name), limit = 3)
     data = allSearch.result()
     link = data["result"][0]["link"]
     while True:
