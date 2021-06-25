@@ -1,5 +1,6 @@
 from flask import Flask , request , render_template , url_for , jsonify
 from youtubesearchpython import Search
+import requests
 import youtube_dl
 from datetime import datetime
 import urllib.request
@@ -7,18 +8,19 @@ import os
 download_link = ""
 title = ""
 app = Flask(__name__)
+ 
 
 
-
-
+i = 0
 def link(name):
    try:
+    global i
+    print(i)
     download_link = ""
     url_data = ""
     allSearch = Search(str(name), limit = 2)
     data = allSearch.result()
     link = data["result"][0]["link"]
-    i = 1
     while True:
         if "https://www.youtube.com/channel/" in link:
             link =  data["result"][i]["link"]
@@ -29,14 +31,15 @@ def link(name):
     return (link)
    except Exception as e:
      print("Error"+str(e))
-     return render_template("index.html" , error="Enter the name properly")
+     return josnify(error="Enter the name properly")
 
 
 @app.route('/update', methods=["POST", "GET"])
 def install():
     import os
-    os.system("pip3 install flask youtube_dl")
+    os.system("pip3 install flask nyoutube_dl")
     return "Update Successfull"
+
 
 @app.route('/', methods=["POST", "GET"])
 def video_link():
@@ -54,12 +57,19 @@ def video_link():
         download_link = url_data["formats"][0]["url"]
         hd_link = url_data["formats"][3]["url"]
         title = url_data["title"]
+        for c in range(0 , 5):
+            responce = requests.get(download_link)
+            print(responce)            
+            if not responce:
+                video_link()
+                i += 1
+            else:
+                break
+        i = 0  
         return jsonify(thumbnail=thumbnail , audio=(str(download_link)),hd_audio=str(hd_link))
      except Exception as e:
         print("ERROR==>"+str(e))
         return jsonify(error="Enter the name properly")
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
