@@ -10,11 +10,9 @@ app = Flask(__name__)
  
 
 
-i = 0
+
 def link(name):
    try:
-    global i
-    print(i)
     download_link = ""
     url_data = ""
     allSearch = Search(str(name), limit = 3)
@@ -22,12 +20,13 @@ def link(name):
     link = data["result"][0]["link"]
     while True:
         if "https://www.youtube.com/channel/" in link:
-            link =  data["result"][i]["link"]
+            link =  data["result"][1]["link"]
+            alt_link = data["result"][2]["link"]
         else:
-            link =  data["result"][i]["link"]
+            link =  data["result"][1]["link"]
+            alt_link = data["result"][2]["link"]
             break
-        i += 1
-    return (link)
+    return (link , alt_link)
    except Exception as e:
      print("Error"+str(e))
      return josnify(error="Enter the name properly")
@@ -49,7 +48,7 @@ def video_link():
         if "https://youtu." in name:
             url = name
         else:
-            url = link(str(name+"song"))
+            url , alt_url = link(str(name+"song"))
         with youtube_dl.YoutubeDL() as ydl:
             url_data = ydl.extract_info(url, download=False)
         thumbnail = url_data["thumbnails"][0]["url"]
@@ -57,12 +56,16 @@ def video_link():
         hd_link = url_data["formats"][3]["url"]
         title = url_data["title"]
         responce = requests.get(download_link)
-        if not responce and i<=2:
-            i += 1
-            video_link()
+        if not responce:
+            with youtube_dl.YoutubeDL() as ydl:
+                url_data = ydl.extract_info(alt_url, download=False)
+                thumbnail = url_data["thumbnails"][0]["url"]
+                download_link = url_data["formats"][0]["url"]
+                hd_link = url_data["formats"][3]["url"]
+                title = url_data["title"]
         else:
             pass
-        i = 1  
+    
         return jsonify(thumbnail=thumbnail , audio=(str(download_link)),hd_audio=str(hd_link))
      except Exception as e:
         print("ERROR==>"+str(e))
