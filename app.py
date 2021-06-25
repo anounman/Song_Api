@@ -58,7 +58,7 @@ def video_link():
         if  responce.status_code != "200":
             return jsonify(error="This Song Is Not Downloadable.Please Try TO Search This Song With Another Name :(")
         else:
-            return jsonify(thumbnail=thumbnail , audio=(str(download_link)),hd_audio=str(hd_link))
+            return jsonify(error="No Error",thumbnail=thumbnail , audio=(str(download_link)),hd_audio=str(hd_link))
      except Exception as e:
         print("ERROR==>"+str(e))
         return jsonify(error="Enter the name properly")
