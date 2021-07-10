@@ -4,10 +4,11 @@ import requests
 import youtube_dl
 from datetime import datetime
 import os
+from flask_cors import CORS
 download_link = ""
 title = ""
 app = Flask(__name__)
- 
+CORS(app)
 
 
 
