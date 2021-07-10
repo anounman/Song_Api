@@ -1,4 +1,4 @@
-from flask import Flask , request , render_template , url_for , jsonify
+from  flask import Flask , request , render_template , url_for , jsonify
 from youtubesearchpython import Search
 import requests
 import youtube_dl
@@ -55,16 +55,16 @@ def video_link():
         download_link = url_data["formats"][0]["url"]
         hd_link = url_data["formats"][3]["url"]
         title = url_data["title"]
-        responce = requests.get(download_link)
-        if not responce:
-            with youtube_dl.YoutubeDL() as ydl:
-                url_data = ydl.extract_info(alt_url, download=False)
-                thumbnail = url_data["thumbnails"][0]["url"]
-                download_link = url_data["formats"][0]["url"]
-                hd_link = url_data["formats"][3]["url"]
-                title = url_data["title"]
-        else:
-            pass
+        # responce = requests.get(download_link)
+        # if not responce:
+        #     with youtube_dl.YoutubeDL() as ydl:
+        #         url_data = ydl.extract_info(alt_url, download=False)
+        #         thumbnail = url_data["thumbnails"][0]["url"]
+        #         download_link = url_data["formats"][0]["url"]
+        #         hd_link = url_data["formats"][3]["url"]
+        #         title = url_data["title"]
+        # else:
+        #     pass
     
         return jsonify(thumbnail=thumbnail , audio=(str(download_link)),hd_audio=str(hd_link))
      except Exception as e:
