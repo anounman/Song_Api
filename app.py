@@ -56,8 +56,7 @@ def index():
             url = request.args.get("link")
             
             title , thumbnail , view, author , streams = fetch_data(url)
-            if (view >= 1000):
-               view = str(view/1000)+k
+           
             return jsonify(title = title , thumbnail=thumbnail , view=view, author=author ,link=streams.url)
         except Exception as e:
             print("Error(index)==>"+str(e))
