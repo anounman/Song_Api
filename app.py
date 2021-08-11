@@ -4,6 +4,7 @@ import requests
 import youtube_dl
 from datetime import datetime
 import os
+import pafy
 from flask_cors import CORS
 download_link = ""
 title = ""
@@ -31,7 +32,33 @@ def link(name):
    except Exception as e:
      print("Error"+str(e))
      return josnify(error="Enter the name properly")
-
+def fetch_data(link):
+    try:    
+        if "/watch?v=" in link:
+            data = link.split("?v=")
+            data = data[-1]
+            print(data)
+        else:
+            data = link.split("/")
+            data = data[-1]
+        video = pafy.new(str(data))
+        title = video.title
+        thumbnail = video.thumb
+        view = video.viewcount
+        author  =  video.author
+        streams = video.getbest()
+        return (title , thumbnail , view , author , streams)
+    except Exception as e:
+        print("Error=>"+str(e))
+@app.route("/youtube_video" , methods=['GET', 'POST'])
+def index():
+        try:
+            url = request.args.get("link")
+            
+            title , thumbnail , view, author , streams = fetch_data(url)
+            return jsonify(title = title , thumbnail=thumbnail , view=view, author=author ,link=streams.url)
+        except Exception as e:
+            print("Error(index)==>"+str(e))
 
 @app.route('/update', methods=["POST", "GET"])
 def install():
