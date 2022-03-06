@@ -3,7 +3,7 @@ CacheControl==0.12.6
 certifi==2019.11.28
 chardet==3.0.4
 click==7.1.2
-pafy
+pafy==0.5.5
 colorama==0.4.3
 contextlib2==0.6.0  
 distlib==0.3.0
@@ -29,6 +29,6 @@ six==1.14.0
 urllib3==1.25.8
 webencodings==0.5.1
 Werkzeug==1.0.1
-youtube-dl==2021.4.1
+youtube-dl==2021.12.17
 youtube-search-python==1.4.5
 flask_cors

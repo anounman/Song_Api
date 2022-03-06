@@ -33,7 +33,7 @@ def link(name):
      print("Error"+str(e))
      return josnify(error="Enter the name properly")
 def fetch_data(link):
-    try:    
+    # try:    
         if "/watch?v=" in link:
             data = link.split("?v=")
             data = data[-1]
@@ -48,18 +48,20 @@ def fetch_data(link):
         author  =  video.author
         streams = video.getbest()
         return (title , thumbnail , view , author , streams)
-    except Exception as e:
-        print("Error=>"+str(e))
-@app.route("/youtube_video" , methods=['GET', 'POST'])
-def index():
-        try:
+    # except Exception as e:
+        # print("url=>"+link)
+        # print("Error=>"+str(e))
+@app.route("/youtube_video")
+def youtubeVideo():
+        # try:
             url = request.args.get("link")
-            
-            title , thumbnail , view, author , streams = fetch_data(url)
+            print(url)
+            title , thumbnail , view, author , streams = fetch_data(str(url))
            
             return jsonify(title = title , thumbnail=thumbnail , view=view, author=author ,link=streams.url)
-        except Exception as e:
-            print("Error(index)==>"+str(e))
+        # except Exception as e:
+        #     print("Error(index)==>"+str(e))
+        #     return jsonify(error="Enter the link properly , ex: /link=''")
 
 @app.route('/update', methods=["POST", "GET"])
 def install():
