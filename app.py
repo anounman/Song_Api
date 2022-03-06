@@ -4,7 +4,7 @@ import requests
 import youtube_dl
 from datetime import datetime
 import os
-import pafy
+import pafy.pafy
 from flask_cors import CORS
 download_link = ""
 title = ""
