@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
+ <img width=200px height=200px src="https://avatars.githubusercontent.com/u/71139852?v=4" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Project Title</h3>
@@ -122,6 +122,8 @@ url : https://songapiv1.herokuapp.com/?name=livitating
 ## 🚀 Deployment <a name = "deployment"></a>
 
 You can deploy it on any webserver wich allow to upload flask , recommendation is heroku
+[![HeroKu](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)](www.heroku.com)
+
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 - [Flask](www.flask.palletsprojects.com/en/2.0.x/) - Backend
