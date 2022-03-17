@@ -120,7 +120,7 @@ url : https://songapiv1.herokuapp.com/?name=livitating
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
-You can deploy it on any webserver wich allow to upload flask , recommendation is heroku
+You can deploy it on any webserver wich allow to upload flask , recommendation is heroku<br>
 [![HeroKu](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)](https://www.heroku.com)
 
 ## ⛏️ Built Using <a name = "built_using"></a>
