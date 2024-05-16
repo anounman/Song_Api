@@ -128,6 +128,6 @@ You can deploy it on any webserver wich allow to upload flask , recommendation i
 - [Flask](www.flask.palletsprojects.com/en/2.0.x/) - Backend
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@anounboy](https://github.com/anounboy) - Idea & Initial work
+- [@anounboy](https://github.com/anounman) - Idea & Initial work
 
 See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
